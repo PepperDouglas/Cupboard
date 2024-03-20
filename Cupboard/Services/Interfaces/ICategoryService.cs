@@ -9,6 +9,8 @@ namespace Cupboard.Services.Interfaces
     //vissa av dem behöver DTOs!
     public interface ICategoryService
     {
+        void CreateCategory(Category category);
+
         Category GetCategory(int id);
 
         ICollection<Category> GetCategories();

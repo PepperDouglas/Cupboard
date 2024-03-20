@@ -1,4 +1,8 @@
 using Cupboard.Contexts;
+using Cupboard.Repository.Interfaces;
+using Cupboard.Repository.Repos;
+using Cupboard.Services.Interfaces;
+using Cupboard.Services.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -14,6 +18,9 @@ builder.Services.AddControllers()
 builder.Services.AddDbContext<CupboardContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("HousingDB"))
 );
+
+builder.Services.AddTransient<ICategoryRepo, CategoryRepo>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
 
 //builder.Services.AddTransient<IApartmentRepo, ApartmentRepo>();
 builder.Services.AddSwaggerGen();

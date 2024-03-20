@@ -1,9 +1,9 @@
 ﻿using Cupboard.Models.Entities;
-using Cupboard.Repository.Interfaces;
+using Cupboard.Services.Interfaces;
 
-namespace Cupboard.Repository.Repos
+namespace Cupboard.Services.Services
 {
-    public class ReviewRepo : IReviewRepo
+    public class ReviewService : IReviewService
     {
         public void CreateReview(Review review) {
             throw new NotImplementedException();

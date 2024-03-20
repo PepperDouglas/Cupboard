@@ -1,9 +1,9 @@
 ﻿using Cupboard.Models.Entities;
-using Cupboard.Repository.Interfaces;
+using Cupboard.Services.Interfaces;
 
-namespace Cupboard.Repository.Repos
+namespace Cupboard.Services.Services
 {
-    public class RecipeRepo : IRecipeRepo
+    public class RecipeService : IRecipeService
     {
         public void CreateRecipe(Recipe recipe) {
             throw new NotImplementedException();
