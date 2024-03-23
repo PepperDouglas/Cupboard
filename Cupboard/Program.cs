@@ -21,6 +21,8 @@ builder.Services.AddDbContext<CupboardContext>(
 
 builder.Services.AddTransient<ICategoryRepo, CategoryRepo>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
+builder.Services.AddTransient<IUserRepo, UserRepo>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 //builder.Services.AddTransient<IApartmentRepo, ApartmentRepo>();
 builder.Services.AddSwaggerGen();

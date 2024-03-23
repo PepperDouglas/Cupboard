@@ -10,6 +10,8 @@ namespace Cupboard.Repository.Interfaces
         //For login and reading
         User ReadUser(string username);
 
+        public User ReadUserById(int id);
+
         void UpdateUser(User user);
 
         void DeleteUser(User user);

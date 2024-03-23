@@ -1,10 +1,11 @@
-﻿using Cupboard.Models.Entities;
+﻿using Cupboard.Helpers;
+using Cupboard.Models.Entities;
 
 namespace Cupboard.Services.Interfaces
 {
     public interface IUserService
     {
-        void CreateUser(User user);
+        ResultFlag CreateUser(User user);
 
         //For login and reading
         User ReadUser(string username);
