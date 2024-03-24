@@ -1,24 +1,47 @@
-﻿using Cupboard.Models.Entities;
+﻿using Cupboard.Contexts;
+using Cupboard.Models.Entities;
 using Cupboard.Repository.Interfaces;
 
 namespace Cupboard.Repository.Repos
 {
     public class RecipeRepo : IRecipeRepo
     {
+
+        private readonly CupboardContext _context;
+
+        public RecipeRepo(CupboardContext context) {
+            _context = context;
+        }
+
         public void CreateRecipe(Recipe recipe) {
-            throw new NotImplementedException();
+            _context.Recipes.Add(recipe);
+            _context.SaveChanges();
         }
 
-        public void DeleteRecipe(string recipeId) {
-            throw new NotImplementedException();
+        public void DeleteRecipe(int recipeId) {
+            var recipe = _context.Recipes.FirstOrDefault(x => x.RecipeID == recipeId);
+            if (recipe != null) {
+                _context.Recipes.Remove(recipe);
+                _context.SaveChanges();
+            }
         }
 
-        public Recipe ReadRecipe(string recipeId) {
-            throw new NotImplementedException();
+        public Recipe ReadRecipe(int recipeId) {
+            return _context.Recipes.FirstOrDefault(r => r.RecipeID == recipeId);
+        }
+
+        public ICollection<Recipe> SearchRecipe(string condition) {
+            return _context.Recipes.Where(r => r.Title.Contains(condition)).ToList();
+        }
+
+        public ICollection<Recipe> ReadRecipes() {
+            return _context.Recipes.ToList<Recipe>();
         }
 
         public void UpdateRecipe(Recipe recipe) {
-            throw new NotImplementedException();
+            _context.Recipes.Update(recipe);
+            _context.SaveChanges();
+            
         }
     }
 }

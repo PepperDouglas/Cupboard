@@ -20,5 +20,19 @@ namespace Cupboard.Models.Entities
         public virtual User User { get; set; }
 
         public virtual ICollection<Review>? Reviews { get; set; }
+
+        //and how do we overwrite when a user removed their account?
+        public Recipe(string title, string description, string ingredientsData, int? categoryID, int? userID) {
+            Title = title;
+            Description = description;
+            IngredientsData = ingredientsData;
+            CategoryID = categoryID;
+            UserID = userID;
+        }
+
+        public Recipe()
+        {
+            
+        }
     }
 }

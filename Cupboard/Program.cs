@@ -23,6 +23,10 @@ builder.Services.AddTransient<ICategoryRepo, CategoryRepo>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IUserRepo, UserRepo>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IRecipeRepo, RecipeRepo>();
+builder.Services.AddTransient<IRecipeService, RecipeService>();
+builder.Services.AddTransient<IReviewRepo, ReviewRepo>();
+builder.Services.AddTransient<IReviewService, ReviewService>();
 
 //builder.Services.AddTransient<IApartmentRepo, ApartmentRepo>();
 builder.Services.AddSwaggerGen();

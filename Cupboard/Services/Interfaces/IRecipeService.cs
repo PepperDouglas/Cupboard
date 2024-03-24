@@ -1,18 +1,24 @@
-﻿using Cupboard.Models.Entities;
+﻿using Cupboard.Helpers;
+using Cupboard.Models.DTO;
+using Cupboard.Models.Entities;
 
 namespace Cupboard.Services.Interfaces
 {
     public interface IRecipeService
     {
-        void CreateRecipe(Recipe recipe);
+        ResultFlag CreateRecipe(RecipeDTO recipeDto);
 
-        Recipe ReadRecipe(string recipeId);
+        Recipe ReadRecipe(int recipeId);
 
-        void UpdateRecipe(Recipe recipe);
+        public ICollection<Recipe> ReadRecipes();
+
+        public ICollection<Recipe> SearchRecipe(string condition);
+
+        ResultFlag UpdateRecipe(RecipeDTO recipeDto);
 
         //might need user id here too tbh
         //but preferable, this will be solved in the service layer imo
         //because this is ONLY a commandeering layer
-        void DeleteRecipe(string recipeId);
+        void DeleteRecipe(int recipeId);
     }
 }

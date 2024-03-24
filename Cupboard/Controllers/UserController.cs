@@ -1,4 +1,5 @@
-﻿using Cupboard.Models.Entities;
+﻿using Cupboard.Models.DTO;
+using Cupboard.Models.Entities;
 using Cupboard.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -14,6 +15,26 @@ namespace Cupboard.Controllers
 
         public UserController(IUserService userService) {
             _userService = userService;
+        }
+
+        [HttpGet("/api/logout")]
+        public IActionResult Logout() { 
+            _userService.Logout();
+            return Ok("Logged out");
+        }
+
+        [HttpGet("/api/login")]
+        public IActionResult Login(UserLogin userDto) {
+            try {
+                var result = _userService.Login(userDto);
+                if (result.Success == false) {
+                    return BadRequest(result.Message);
+                }
+                return Ok();
+            }
+            catch (Exception ex) {
+                return BadRequest(ex.Message);  
+            }
         }
 
         [HttpPost]

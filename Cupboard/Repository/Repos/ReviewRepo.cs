@@ -1,20 +1,28 @@
-﻿using Cupboard.Models.Entities;
+﻿using Cupboard.Contexts;
+using Cupboard.Models.Entities;
 using Cupboard.Repository.Interfaces;
 
 namespace Cupboard.Repository.Repos
 {
     public class ReviewRepo : IReviewRepo
     {
+        private readonly CupboardContext _context;
+
+        public ReviewRepo(CupboardContext context) {
+            _context = context;
+        }
+
         public void CreateReview(Review review) {
-            throw new NotImplementedException();
+            _context.Reviews.Add(review);
+            _context.SaveChanges();
         }
 
         public ICollection<Review> ReadAllReviews(int recipeId) {
-            throw new NotImplementedException();
+            return _context.Reviews.Where(r => r.RecipeID == recipeId).ToList();
         }
 
         public Review ReadReview(int reviewId) {
-            throw new NotImplementedException();
+            return _context.Reviews.SingleOrDefault(r => r.ReviewID == reviewId);
         }
     }
 }

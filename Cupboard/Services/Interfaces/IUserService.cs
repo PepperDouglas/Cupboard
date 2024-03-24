@@ -1,4 +1,5 @@
 ﻿using Cupboard.Helpers;
+using Cupboard.Models.DTO;
 using Cupboard.Models.Entities;
 
 namespace Cupboard.Services.Interfaces
@@ -8,10 +9,14 @@ namespace Cupboard.Services.Interfaces
         ResultFlag CreateUser(User user);
 
         //For login and reading
-        User ReadUser(string username);
+        UserSafe ReadUser(string username);
 
         void UpdateUser(User user);
 
         void DeleteUser(User user);
+
+        ResultFlag Login(UserLogin userLogin);
+
+        void Logout();
     }
 }

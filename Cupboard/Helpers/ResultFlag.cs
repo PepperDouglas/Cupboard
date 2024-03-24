@@ -10,6 +10,10 @@
             Message = message;
         }
 
+        public ResultFlag(bool success) {
+            Success = success;
+        }
+
         public ResultFlag()
         {
             

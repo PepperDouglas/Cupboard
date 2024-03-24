@@ -10,5 +10,9 @@ namespace Cupboard.Repository.Interfaces
 
         ICollection<Category> GetCategories();
 
+        public bool CategoryExists(string name);
+
+        Category GetCategoryByName(string name);
+
     }
 }

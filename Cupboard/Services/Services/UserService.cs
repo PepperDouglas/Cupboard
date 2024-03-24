@@ -1,4 +1,5 @@
 ﻿using Cupboard.Helpers;
+using Cupboard.Models.DTO;
 using Cupboard.Models.Entities;
 using Cupboard.Repository.Interfaces;
 using Cupboard.Services.Interfaces;
@@ -12,6 +13,27 @@ namespace Cupboard.Services.Services
 
         public UserService(IUserRepo userRepo) {
             _userRepo = userRepo;
+        }
+
+        public ResultFlag Login(UserLogin userLogin) {
+            var userdb = _userRepo.ReadUser(userLogin.Username);
+            ResultFlag flag = new ResultFlag(false, "Something went wrong");
+      
+            if (userdb == null) {
+                flag.Message = "No such user";
+                return flag;
+            }
+            if (userdb.Password != userLogin.Password) {
+                flag.Message = "Incorrect password";
+                
+            } else if (userdb.Password ==  userLogin.Password) {
+                UserLogger.UserId = userdb.UserID;
+                UserLogger.IsLogged = true;
+
+                flag.Success = true;
+                
+            }
+            return flag;
         }
 
         public ResultFlag CreateUser(User user) {
@@ -31,12 +53,23 @@ namespace Cupboard.Services.Services
             _userRepo.DeleteUser(user);
         }
 
-        public User ReadUser(string username) {
-            return _userRepo.ReadUser(username);
+        public UserSafe ReadUser(string username) {
+            var userdb = _userRepo.ReadUser(username);
+            UserSafe user = new UserSafe(
+                userdb.UserID,
+                userdb.Name,
+                userdb.Email
+            );
+            return user;
         }
 
         public void UpdateUser(User user) {
             _userRepo.UpdateUser(user);
+        }
+
+        public void Logout() {
+            UserLogger.IsLogged = false;
+            UserLogger.UserId = 0;
         }
     }
 }
