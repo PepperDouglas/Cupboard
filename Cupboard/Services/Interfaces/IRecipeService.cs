@@ -14,6 +14,8 @@ namespace Cupboard.Services.Interfaces
 
         public ICollection<Recipe> SearchRecipe(string condition);
 
+        public ICollection<RecipeAvgDTO> GetRecipesWithReviews();
+
         ResultFlag UpdateRecipe(RecipeDTO recipeDto);
 
         //might need user id here too tbh

@@ -12,6 +12,8 @@ namespace Cupboard.Repository.Interfaces
 
         public ICollection<Recipe> SearchRecipe(string condition);
 
+        public ICollection<Recipe> ReadRecipesWithReviews();
+
         void UpdateRecipe(Recipe recipe);
 
         //might need user id here too tbh

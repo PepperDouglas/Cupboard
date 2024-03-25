@@ -36,6 +36,17 @@ namespace Cupboard.Controllers
             }
         }
 
+        [HttpGet("detail")]
+        public IActionResult GetRecipesWithReviews() {
+            try {
+                var recipes = _recipeService.GetRecipesWithReviews();
+                return Ok(recipes);
+            }
+            catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("/api/search/{condition}")]
         public IActionResult SearchRecipe(string condition) {
             try {

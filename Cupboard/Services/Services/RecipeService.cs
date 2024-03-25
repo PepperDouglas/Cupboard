@@ -73,6 +73,27 @@ namespace Cupboard.Services.Services
             _recipeRepo.DeleteRecipe(recipeId);
         }
 
+        public ICollection<RecipeAvgDTO> GetRecipesWithReviews() {
+            //calcs here
+            var recipes = _recipeRepo.ReadRecipesWithReviews() ?? throw new Exception("Recipes with reviews could not be read");
+            List<RecipeAvgDTO> avg = new List<RecipeAvgDTO>();
+            foreach ( var recipe in recipes ) {
+                double avgReview = recipe.Reviews.Any() ? recipe.Reviews.Average(r => r.Grade) : 0;
+                avg.Add(new RecipeAvgDTO(recipe.Title, recipe.Description, recipe.IngredientsData,
+                    recipe.Category.Name, avgReview));
+            }
+
+            /* Alternative LINQ
+             * var recipeDtos = recipes.Select(r => new RecipeDto(
+                r.RecipeID,
+                r.Title,
+                r.Reviews.Any() ? r.Reviews.Average(review => review.Grade) : 0 // Safely calculates the average grade, defaults to 0 if no reviews
+            )).ToList();
+            */
+            
+            return avg;
+        }
+
         public Recipe ReadRecipe(int recipeId) {
             return _recipeRepo.ReadRecipe(recipeId);
         }

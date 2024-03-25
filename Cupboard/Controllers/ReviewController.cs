@@ -42,6 +42,9 @@ namespace Cupboard.Controllers
         [HttpPost]
         //create
         public IActionResult CreateReview(ReviewDTO reviewDTO) {
+            if (reviewDTO.Grade < 1 || reviewDTO.Grade > 5) { 
+                return BadRequest("Incorrect grading parameter");
+            }
             try {
                 var status = _reviewService.CreateReview(reviewDTO);
                 if (!status.Success) {

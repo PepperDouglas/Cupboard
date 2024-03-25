@@ -1,6 +1,7 @@
 ﻿using Cupboard.Contexts;
 using Cupboard.Models.Entities;
 using Cupboard.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cupboard.Repository.Repos
 {
@@ -36,6 +37,10 @@ namespace Cupboard.Repository.Repos
 
         public ICollection<Recipe> ReadRecipes() {
             return _context.Recipes.ToList<Recipe>();
+        }
+
+        public ICollection<Recipe> ReadRecipesWithReviews() {
+            return _context.Recipes.Include(r => r.Reviews).Include(r => r.Category).ToList();
         }
 
         public void UpdateRecipe(Recipe recipe) {
