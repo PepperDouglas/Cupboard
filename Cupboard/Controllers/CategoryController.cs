@@ -18,7 +18,6 @@ namespace Cupboard.Controllers
 
         [HttpPost]
         public IActionResult PostCategory(Category category) {
-            //input validation miss
             try {
                 _categoryService.CreateCategory(category);
                 return Created();

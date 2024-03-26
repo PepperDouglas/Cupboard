@@ -8,7 +8,6 @@ namespace Cupboard.Services.Interfaces
     {
         ResultFlag CreateUser(User user);
 
-        //For login and reading
         UserSafe ReadUser(string username);
 
         void UpdateUser(User user);

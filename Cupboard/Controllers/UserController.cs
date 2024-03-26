@@ -30,7 +30,7 @@ namespace Cupboard.Controllers
                 if (result.Success == false) {
                     return BadRequest(result.Message);
                 }
-                return Ok();
+                return Ok("Logged in");
             }
             catch (Exception ex) {
                 return BadRequest(ex.Message);  
@@ -41,9 +41,6 @@ namespace Cupboard.Controllers
         public IActionResult CreateUser(User user) {
             try {
                 var result = _userService.CreateUser(user);
-                //Exception, status code, or flags
-                //status code, since it is an expected occurance that a
-                //new user enters an already taken name
                 if (result.Success == false) {
                     return BadRequest(result.Message);
                 }
@@ -80,7 +77,6 @@ namespace Cupboard.Controllers
             }
         }
         
-
         [HttpDelete]
         public IActionResult DeleteUser(User username) {
             try {
@@ -91,6 +87,5 @@ namespace Cupboard.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
     }
 }

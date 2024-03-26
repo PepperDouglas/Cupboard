@@ -20,7 +20,7 @@ namespace Cupboard.Services.Services
 
         public ResultFlag CreateRecipe(RecipeDTO recipeDto) {
             ResultFlag flag = new ResultFlag(false, "Something went wrong");
-            //see if logged in
+            
             if (UserLogger.IsLogged == false) {
                 flag.Message = "No user logged in";
                 return flag;
@@ -40,7 +40,7 @@ namespace Cupboard.Services.Services
                     }
                 }
             }
-            //dto that bad boy
+            
             Recipe recipe = new Recipe();
             if ( foundCat ) {
                 recipe.Title = recipeDto.Title;
@@ -52,7 +52,7 @@ namespace Cupboard.Services.Services
                 flag.Message = "No such category";
                 return flag;
             }
-            //send it
+            
             try {
                 _recipeRepo.CreateRecipe(recipe);
                 flag.Message = "Success!";
@@ -74,8 +74,9 @@ namespace Cupboard.Services.Services
         }
 
         public ICollection<RecipeAvgDTO> GetRecipesWithReviews() {
-            //calcs here
+            
             var recipes = _recipeRepo.ReadRecipesWithReviews() ?? throw new Exception("Recipes with reviews could not be read");
+            
             List<RecipeAvgDTO> avg = new List<RecipeAvgDTO>();
             foreach ( var recipe in recipes ) {
                 double avgReview = recipe.Reviews.Any() ? recipe.Reviews.Average(r => r.Grade) : 0;
@@ -110,10 +111,9 @@ namespace Cupboard.Services.Services
             throw new Exception("No matching results");
         }
 
-        public ResultFlag UpdateRecipe(RecipeDTO recipeDto) {
-            //see if category is fine
+        public ResultFlag UpdateRecipe(RecipeDTO recipeDto) {           
             ResultFlag flag = new ResultFlag(false, "Something went wrong");
-            //bool categoryValid = _categoryRepo.CategoryExists(recipeDto.Category);
+            
             var category = _categoryRepo.GetCategoryByName(recipeDto.Category);
             if (category== null) {
                 flag.Message = "Invalid category";
@@ -123,7 +123,7 @@ namespace Cupboard.Services.Services
                 flag.Message = "No user logged in";
                 return flag;
             }
-            //see if loggedid is same as recipe
+            
             var recipe = _recipeRepo.ReadRecipe(recipeDto.RecipeToBeUpdatedID.GetValueOrDefault());
             if (recipe == null) {
                 flag.Message = "No such recipe";
@@ -133,6 +133,7 @@ namespace Cupboard.Services.Services
                 flag.Message = "Can only update your own recipes";
                 return flag;
             }
+
             recipe.Title = recipeDto.Title;
             recipe.Description = recipeDto.Description;
             recipe.IngredientsData = recipeDto.IngredientsData;

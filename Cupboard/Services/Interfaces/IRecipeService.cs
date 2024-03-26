@@ -18,9 +18,6 @@ namespace Cupboard.Services.Interfaces
 
         ResultFlag UpdateRecipe(RecipeDTO recipeDto);
 
-        //might need user id here too tbh
-        //but preferable, this will be solved in the service layer imo
-        //because this is ONLY a commandeering layer
         void DeleteRecipe(int recipeId);
     }
 }

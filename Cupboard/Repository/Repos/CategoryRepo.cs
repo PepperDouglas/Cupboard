@@ -26,7 +26,6 @@ namespace Cupboard.Repository.Repos
             return _context.Categories.SingleOrDefault(c => c.CategoryID == id);
         }
 
-        //helt not needed pga nedanstående metod?
         public bool CategoryExists(string name) { 
             return _context.Categories.Any(c => EF.Functions.Like(c.Name.ToLower(), name.ToLower()));
         }

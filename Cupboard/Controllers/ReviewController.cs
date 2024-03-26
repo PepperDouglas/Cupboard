@@ -16,7 +16,6 @@ namespace Cupboard.Controllers
         }
 
         [HttpGet("{id}")]
-        //read1
         public IActionResult GetReview(int id) {
             try {
                 var review = _reviewService.ReadReview(id);
@@ -28,7 +27,6 @@ namespace Cupboard.Controllers
         }
 
         [HttpGet("reviews-for-recipe/{id}")]
-        //readall
         public IActionResult GetRecipeReviews(int id) {
             try {
                 var reviews = _reviewService.ReadAllReviews(id);
@@ -40,7 +38,6 @@ namespace Cupboard.Controllers
         }
 
         [HttpPost]
-        //create
         public IActionResult CreateReview(ReviewDTO reviewDTO) {
             if (reviewDTO.Grade < 1 || reviewDTO.Grade > 5) { 
                 return BadRequest("Incorrect grading parameter");

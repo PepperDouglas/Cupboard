@@ -69,7 +69,6 @@ namespace Cupboard.Controllers
             }
         }
 
-        //is route and body data combinable?
         [HttpPut]
         public IActionResult UpdateRecipe(RecipeDTO recipeDto) {
             try {

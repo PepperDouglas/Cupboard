@@ -28,7 +28,6 @@ builder.Services.AddTransient<IRecipeService, RecipeService>();
 builder.Services.AddTransient<IReviewRepo, ReviewRepo>();
 builder.Services.AddTransient<IReviewService, ReviewService>();
 
-//builder.Services.AddTransient<IApartmentRepo, ApartmentRepo>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

@@ -45,6 +45,5 @@ namespace Cupboard.Contexts
                 .HasForeignKey(r => r.UserID)
                 .OnDelete(DeleteBehavior.NoAction);
         }
-
     }
 }

@@ -7,7 +7,6 @@ namespace Cupboard.Repository.Interfaces
 
         void CreateUser(User user);
         
-        //For login and reading
         User ReadUser(string username);
 
         public User ReadUserById(int id);

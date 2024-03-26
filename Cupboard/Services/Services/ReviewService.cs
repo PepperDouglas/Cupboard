@@ -18,21 +18,18 @@ namespace Cupboard.Services.Services
 
         public ResultFlag CreateReview(ReviewDTO reviewDto) {
             ResultFlag flag = new ResultFlag(false, "Something went wrong");
-            //_reviewRepo.CreateReview(review);
-            //check if logged in
+            
             if (!UserLogger.IsLogged) {
                 flag.Message = "Please log in to create a review";
                 return flag;    
             }
 
-            //check if not own recipe
             var recipe = _recipeRepo.ReadRecipe(reviewDto.RecipeID);
             if (recipe.UserID == UserLogger.UserId) {
                 flag.Message = "You can not review you own recipes";
                 return flag;
             }
 
-            //check if not already made review
             var allReviews = _reviewRepo.ReadAllReviews(reviewDto.RecipeID);
             foreach ( var rev in allReviews ) { 
                 if (rev.UserID == UserLogger.UserId) {
@@ -41,13 +38,13 @@ namespace Cupboard.Services.Services
                     return flag;
                 }
             }
-            //domainify
+            
             Review review = new Review(
                 grade: reviewDto.Grade,
                 userID: UserLogger.UserId,
                 recipeID: reviewDto.RecipeID
             );
-            //full send
+            
             _reviewRepo.CreateReview(review);
             flag.Message = "Review created";
             flag.Success = true;
