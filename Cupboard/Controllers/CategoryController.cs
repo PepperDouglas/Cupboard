@@ -34,6 +34,9 @@ namespace Cupboard.Controllers
             }
             try {
                 var category = _categoryService.GetCategory(id);
+                if (category == null) {
+                    return BadRequest("No such category");
+                }
                 return Ok(category);
             }
             catch (Exception ex) {

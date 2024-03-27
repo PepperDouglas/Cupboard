@@ -54,7 +54,7 @@ namespace Cupboard.Services.Services
         }
 
         public UserSafe ReadUser(string username) {
-            var userdb = _userRepo.ReadUser(username);
+            var userdb = _userRepo.ReadUser(username) ?? throw new Exception("No user found");
             UserSafe user = new UserSafe(
                 userdb.UserID,
                 userdb.Name,
